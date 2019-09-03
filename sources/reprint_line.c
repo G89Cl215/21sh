@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:11:47 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:26:39 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:50:54 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_update_line(t_cursor *cursor, char *buff)
 	size_t		i;
 
 	ft_clear_line(cursor);
-	ft_display_prompt();
+	ft_display_prompt(cursor->line_end);
 	ft_insert_buff_in_line(cursor, buff);
 	write(0, cursor->cmd_line, cursor->line_len);
 	i = ft_display_len(cursor->cmd_line);

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:19:46 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:52:23 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,7 @@
 #include "minishell.h"
 #include "parsing.h"
 #include "libft.h"
-/*
-void	ft_display_prompt(char flag)
-{
-	if (flag == NEWLINE)
-		ft_putstr("> ");
-	else if (flag == QUOTES)
-		ft_putstr("quotes> ");
-	else if (flag == DQUOTES)
-		ft_putstr("dquotes> ");
-	else
-		ft_printf("%s$> ", NAME);
-}
-*/
+
 int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
 {
 	pid_t		father;

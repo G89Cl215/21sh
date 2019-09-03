@@ -6,11 +6,14 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 11:40:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 11:47:31 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:52:33 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static size_t	ft_count_nl(char *cmd_line)
+#include <stdlib.h>
+#include "minishell.h"
+
+static size_t	ft_count_nl(const char *cmd_line)
 {
 	size_t		nl_nbr;
 	size_t		i;
@@ -26,7 +29,26 @@ static size_t	ft_count_nl(char *cmd_line)
 	return (nl_nbr);
 }
 
-size_t		ft_get_line_form(const char *cmd_line)
+size_t		*ft_get_line_form(const char *cmd_line)
 {
 	size_t		*line_form;
+	size_t		seg_nbr;
+	size_t		i;
+	size_t		j;
+
+	j = 0;
+	if ((seg_nbr = ft_count_nl(cmd_line) + 1) == 1)
+		return (NULL);
+	if (!(line_form = (size_t *)malloc(sizeof(size_t) * (seg_nbr + 1))))
+		ft_crisis_exit(MALLOC_ERR);
+	line_form[seg_nbr] = SIZE_MAX;
+	while ((*cmd_line))
+	{
+		i = 0;
+		while (*(cmd_line++) != '\n')
+			i++;
+		line_form[j] = i;
+		j++;
+	}
+	return (line_form);
 }

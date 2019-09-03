@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:06:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/26 19:38:23 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:30:12 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_load_history(t_data *data)
 	cursor->char_cursor = len;
 	cursor->line_len = len;
 	cursor->display_cursor = ft_display_len(cursor->cmd_line);
+	cursor->line_form = ft_get_line_form(cursor->cmd_line);
 }
 
 void	ft_clean_history(t_dlist **history)

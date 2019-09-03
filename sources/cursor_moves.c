@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 14:51:10 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 13:05:59 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:53:24 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_left_cursor(t_data *data)
 	t_cursor	*cursor;
 
 	cursor = data->cursor;
-	if (cursor->char_cursor > 0)
+	if (cursor->display_cursor > 0)
 	{
 		ft_reajust_cursor_wrap(cursor, UP);
 		(cursor->char_cursor)--;

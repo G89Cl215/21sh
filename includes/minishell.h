@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:17:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:09:09 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:09:04 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include "list.h"
 # include "def.h"
 
-# define NAME "minishell"
+# define NAME "21_tgoued"
+# define NL_PROMPT			"> "
+# define QUOTES_PROMPT		"quotes> "
+# define DQUOTES_PROMPT		"dquotes> "
 # define EXEC_SUCCESS		0
 # define EXEC_FAILURE		-1
 # define EXIT_SIGNAL		-2
@@ -32,9 +35,11 @@
 # define NO_MATCH			-12
 # define ERR_NBR			6
 # define IFS				" \t"
+
 # ifndef PATH_MAX
 # define PATH_MAX			4096
 #endif
+
 # define NO_DELIM			0
 # define NEWLINE			1
 # define QUOTES				2

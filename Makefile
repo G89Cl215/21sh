@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/03 13:25:10 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/03 17:30:28 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIBS		=	$(LIB_PATH)/$(LIB) \
 OBJ_DIR		=	obj
 
 SRC_DIR	=	sources
-SOURCES		=	main.c \
+SOURCES		=	ft_get_next_cmd_line.c \
+				ft_get_line_form.c \
 				minishell.c \
 				termcaps.c \
 				reprint_line.c \
@@ -84,12 +85,15 @@ all			:	libs
 libs	:
 	@cd $(LIB_PATH) && $(MAKE)
 
+dep := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.d))
+-include $(dep)
+
 $(NAME)		:	$(LIBS) $(OBJS) Makefile
 	@$(CC) $(CFLAGS) -ltermcap $(OBJS) $(LIBS) $(HDR_FLAG) -o $@
 	@echo "$@ has been successfully created."
 
 $(OBJS)		: $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(HDR_FLAG) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(HDR_FLAG) -o $@ -c $< -MMD -MP
 	@echo "\t\t\t\t\t\t\t\t[OK]\r\t$*"
 
 $(OBJ_DIR)	:

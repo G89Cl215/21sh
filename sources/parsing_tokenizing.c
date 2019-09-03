@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:23:48 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:20:33 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:13:12 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
 
 static t_arglist	*ft_multiline_command(t_data *data)
 {
-	char			*line;
 	t_arglist		*new_link;
 
-	line = NULL;
 	new_link = NULL;
-//	ft_display_prompt();//flag);
 	if ((ft_get_next_cmd_line(data)))
 		new_link = ft_tokenizing(data);
 	return (new_link);
