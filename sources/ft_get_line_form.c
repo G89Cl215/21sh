@@ -6,14 +6,16 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 11:40:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 15:52:33 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 20:13:56 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "def.h"
+#include "libft.h"
 #include "minishell.h"
 
-static size_t	ft_count_nl(const char *cmd_line)
+static size_t		ft_count_nl(const char *cmd_line)
 {
 	size_t		nl_nbr;
 	size_t		i;
@@ -29,7 +31,7 @@ static size_t	ft_count_nl(const char *cmd_line)
 	return (nl_nbr);
 }
 
-size_t		*ft_get_line_form(const char *cmd_line)
+size_t				*ft_get_line_form(const char *cmd_line)
 {
 	size_t		*line_form;
 	size_t		seg_nbr;
@@ -51,4 +53,11 @@ size_t		*ft_get_line_form(const char *cmd_line)
 		j++;
 	}
 	return (line_form);
+}
+
+void				ft_update_line_form(t_cursor *cursor)
+{
+	if ((cursor->line_form))
+		ft_memdel((void **)&(cursor->line_form));
+	cursor->line_form = ft_get_line_form(cursor->cmd_line);
 }

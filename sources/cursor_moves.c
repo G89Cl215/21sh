@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 14:51:10 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 15:53:24 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 19:57:00 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_left_cursor(t_data *data)
 		while ((cursor->cmd_line[cursor->char_cursor] & bit_8)
 		&& !(cursor->cmd_line[cursor->char_cursor] & bit_7))
 			(cursor->char_cursor)--;
-		ft_cursor_reset(cursor->display_cursor);
+		ft_cursor_reset(cursor, cursor->display_cursor);
 		ft_position_cursor(cursor);
 	}
 	return (1);
@@ -46,7 +46,7 @@ int		ft_right_cursor(t_data *data)
 		while ((cursor->cmd_line[cursor->char_cursor] & bit_8)
 		&& !(cursor->cmd_line[cursor->char_cursor] & bit_7))
 			(cursor->char_cursor)++;
-		ft_cursor_reset(cursor->display_cursor);
+		ft_cursor_reset(cursor, cursor->display_cursor);
 		ft_position_cursor(cursor);
 	}
 	return (1);

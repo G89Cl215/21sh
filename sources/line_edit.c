@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 10:42:18 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 17:15:18 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 20:19:53 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_backspace(t_data *data)
 	t_cursor	*cursor;
 
 	cursor = data->cursor;
-	if ((cursor->line_len) && (cursor->char_cursor))
+	if ((cursor->line_len) && (cursor->display_cursor))
 	{
 		ft_reajust_cursor_wrap(cursor, UP);
 		(cursor->display_cursor)--;

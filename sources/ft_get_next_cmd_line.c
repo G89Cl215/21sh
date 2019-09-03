@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 07:52:01 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 15:45:00 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:52:26 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_clear_line(t_cursor *cursor)
 {
 	char	*buff;
 
-	ft_cursor_reset(cursor->display_cursor);
+	ft_cursor_reset(cursor, cursor->display_cursor);
 	buff = tgetstr("cd", NULL);
 	tputs(buff, 1, &ft_pc);
 }
