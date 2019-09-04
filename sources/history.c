@@ -6,22 +6,46 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:06:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 15:30:12 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:30:39 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <termios.h>
+#include <term.h>
 #include "parsing.h"
 #include "dispatcher.h"
 #include "libft.h"
 #include "d_list.h"
 #include "word_tools.h"
 
-void	ft_load_history(t_data *data)
+static void		ft_multiline_scrolling(int to_scroll)
 {
+	char	*tc;
+
+	if (!(to_scroll))
+		return ;
+	tc = (to_scroll > 0) ? tgetstr("do", NULL) : tgetstr("up", NULL);
+	if (to_scroll < 0)
+		to_scroll = -1 * to_scroll;
+	while ((to_scroll))
+	{
+		tputs(tc, 1, &ft_pc);
+		to_scroll--;
+	}
+}
+
+void			ft_load_history(t_data *data)
+{
+	int			to_scroll;
 	size_t		len;
 	t_cursor	*cursor;
 
+	to_scroll = 0;
+	cursor = data->cursor;
+	if ((cursor->line_form))
+		to_scroll -= ft_get_multiline_hight(cursor->line_form,
+													cursor->display_cursor);
 	cursor = data->cursor;
 	ft_bzero(cursor->cmd_line, MAX_LINE);
 	len = ft_strlen((data->history)->cmd_line);
@@ -29,10 +53,13 @@ void	ft_load_history(t_data *data)
 	cursor->char_cursor = len;
 	cursor->line_len = len;
 	cursor->display_cursor = ft_display_len(cursor->cmd_line);
-	cursor->line_form = ft_get_line_form(cursor->cmd_line);
+	ft_update_line_form(cursor);
+	if ((cursor->line_form))
+		to_scroll += ft_get_multiline_hight(cursor->line_form, -1);
+	ft_multiline_scrolling(to_scroll);
 }
 
-void	ft_clean_history(t_dlist **history)
+void			ft_clean_history(t_dlist **history)
 {
 	t_dlist		*voyager;
 
@@ -52,7 +79,7 @@ void	ft_clean_history(t_dlist **history)
 	}
 }
 
-int		ft_up_cursor(t_data *data)
+int				ft_up_cursor(t_data *data)
 {
 	t_cursor	*cursor;
 
@@ -72,7 +99,7 @@ int		ft_up_cursor(t_data *data)
 	return (1);
 }
 
-int		ft_down_cursor(t_data *data)
+int				ft_down_cursor(t_data *data)
 {
 	t_cursor	*cursor;
 

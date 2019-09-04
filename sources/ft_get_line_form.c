@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 11:40:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 20:13:56 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:00:37 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "def.h"
 #include "libft.h"
 #include "minishell.h"
+#include "word_tools.h"
 
 static size_t		ft_count_nl(const char *cmd_line)
 {
@@ -47,17 +48,41 @@ size_t				*ft_get_line_form(const char *cmd_line)
 	while ((*cmd_line))
 	{
 		i = 0;
-		while (*(cmd_line++) != '\n')
+		while ((*cmd_line) && *(cmd_line++) != '\n')
+		{
+			while (((*cmd_line & bit_8) && !(*cmd_line & bit_7)))
+				cmd_line++;
 			i++;
+		}
 		line_form[j] = i;
 		j++;
 	}
 	return (line_form);
 }
 
+int					ft_get_multiline_hight(size_t *line_form, int ref)
+{
+	int		hight;
+	int		char_nbr;
+
+	hight = 0;
+	if ((line_form))
+	{
+		char_nbr = line_form[hight];
+		while (line_form[hight] != SIZE_MAX && (ref < 0 || char_nbr < ref))
+		{
+			hight++;
+			char_nbr += line_form[hight];
+		}
+		if (line_form[hight] == SIZE_MAX)
+			hight--;
+	}
+	return (hight);
+}
+
 void				ft_update_line_form(t_cursor *cursor)
 {
 	if ((cursor->line_form))
-		ft_memdel((void **)&(cursor->line_form));
+		ft_memdel((void **)(&(cursor->line_form)));
 	cursor->line_form = ft_get_line_form(cursor->cmd_line);
 }

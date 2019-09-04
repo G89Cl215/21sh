@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 11:14:55 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/07/09 08:46:34 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:24:05 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_exit(t_env *env, char **av, int *status)
 {
 	size_t	len;
 
+	(void)env;
 	len = ft_tablen(av);
 	*status = EXEC_SUCCESS;
 	if (len == 2)
@@ -46,7 +47,6 @@ int		ft_exit(t_env *env, char **av, int *status)
 		return (EXEC_FAILURE);
 	}
 	ft_close_stream(0);
-	ft_tabfree(env->value);
 	return (EXIT_SIGNAL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 13:52:23 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:04:03 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int		main(void)
 		}
 	}
 	def_term_mode();
+	ft_free_data(&data);
 	return (status);
 }

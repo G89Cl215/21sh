@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:48:35 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 16:17:52 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:20:43 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			ft_save_history(t_data *data, char flag)
 {
 	static char		*history_entry = NULL;
 
-	if (flag == SAVE)
+	if ((history_entry) && flag == SAVE)
 	{
 		ft_dlistadd_start(&(data->history),
 				ft_new_dnod(history_entry, PAST_CMD));
@@ -55,9 +55,6 @@ void			ft_save_history(t_data *data, char flag)
 	}
 	else
 		ft_concat_lines(&history_entry, (data->cursor)->cmd_line);
-//	ft_printf("\n");
-//	ft_putendl(history_entry);
-
 }
 
 int				ft_enter(t_data *data)

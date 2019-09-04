@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:38:41 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 20:13:58 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:28:17 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "def.h"
 
-# define PROMPT				"ici le πromπt: "
 # define EXIT_SIG			2
 # define ENTER_SIG			3
 
@@ -35,6 +34,7 @@ size_t		ft_get_term_length(void);
 size_t		ft_get_term_hight(void);
 void		ft_reajust_cursor_wrap(t_cursor *cursor, int flag);
 size_t		*ft_get_line_form(const char *cmd_line);
+int			ft_get_multiline_hight(size_t *line_form, int ref);
 void		ft_update_line_form(t_cursor *cursor);
 void		ft_clean_history(t_dlist **history);
 void		ft_load_history(t_data *data);

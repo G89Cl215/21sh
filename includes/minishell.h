@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:17:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 14:09:04 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:17:53 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			ft_fork_and_exec(t_env *env, t_env *env_exec, char **av,
 																int *status);
 void		ft_display_err(t_env *env, char **av, int status, int w_index);
 void		ft_crisis_exit(int status);
-//void		ft_display_prompt(char flag);
+void		ft_free_data(t_data *data);
 char		**ft_command_parsing(t_data *data, int *status);
 void		ft_init_env(t_env *env);
 char		*ft_find_exec_path(t_env *env, char *exec);

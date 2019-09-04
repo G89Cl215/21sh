@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/03 17:30:28 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/04 12:18:22 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SOURCES		=	ft_get_next_cmd_line.c \
 				parsing_token_tools.c \
 				perror1.c \
 				perror2.c \
+				ft_free_data.c \
 
 SRCS		=	$(addprefix $(SRC_DIR)/,$(SOURCES))
 OBJS		=	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))

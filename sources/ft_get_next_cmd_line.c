@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 07:52:01 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 17:52:26 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:04:04 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "def.h"
 #include "dispatcher.h"
 #include "parsing.h"
-/*
+
 #include <stdio.h>
 
 void	print_bytes(void *ptr, int size)
@@ -35,7 +35,7 @@ void	print_bytes(void *ptr, int size)
 	}
 	printf("\n\r");
 }
-*/
+
 int		ft_pc(int c)
 {
 	return (write(0, &c, 1));
