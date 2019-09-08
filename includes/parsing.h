@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:38:41 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/04 15:28:17 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 11:40:44 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		ft_load_history(t_data *data);
 void		ft_save_history(t_data *data, char flag);
 void		ft_save_in_clipboard(t_data *data, char *to_save, size_t len);
 void		ft_position_cursor(t_cursor *cursor);
+void		ft_multiline_position(t_cursor *cursor, char flag, size_t ref);
 int			ft_get_next_cmd_line(t_data *data);
 
 void	print_bytes(void *ptr, int size);

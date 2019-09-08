@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/04 15:04:03 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 11:31:30 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
 	{
 		father = fork();
 		if (father == 0)
-			execve(execpath, av, env_exec->value);
+				execve(execpath, av, env_exec->value);	//return status si non-executable/faillure to execute
 		if (father > 0)
 			wait(status);
 		ft_set_env_var(env, "_", execpath);
@@ -91,6 +91,7 @@ int		main(void)
 		}
 		else if (!(status = 0))
 		{
+			ft_putstr("\n");
 			ft_putendl("exit");
 			break ;
 		}

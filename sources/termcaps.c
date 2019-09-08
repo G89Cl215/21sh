@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 21:35:32 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/29 14:51:46 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 11:25:25 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cap		g_termcap[] =
 	{META_F_CODE, &ft_to_next_word},
 	{META_L_CODE, &ft_to_next_end_word},
 	{META_D_CODE, &ft_del_next_word},
+	{META_K_CODE, &ft_clear_screen_key},
 	{UP_CODE, &ft_up_cursor},
 	{CTRL_P_CODE, &ft_up_cursor},
 	{DOWN_CODE, &ft_down_cursor},

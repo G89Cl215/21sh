@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:21:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/26 19:39:20 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 11:40:45 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int		ft_end_of_stream(t_data *data)
 int		ft_clear_screen_key(t_data *data)
 {
 	char		*tc;
+	t_cursor	*cursor;
 
+	cursor = data->cursor;
 	tc = tgetstr("cl", NULL);
 	tputs(tc, 1, &ft_pc);
-	ft_update_line(data->cursor, NULL);
+	if ((cursor->line_form))
+		ft_multiline_position(cursor, DOWN, ft_display_len(cursor->cmd_line));
+	ft_update_line(cursor, NULL);
 	return (1);
 }

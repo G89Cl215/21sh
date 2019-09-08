@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:26:15 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/04 11:07:17 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 11:40:44 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 static void		ft_multiline_cursor_goto(t_cursor *cursor, size_t *vert, size_t *hor, size_t ref)
 {
-	size_t	len;
-	size_t	co;
-	size_t	i;
+	size_t		len;
+	size_t		co;
+	size_t		i;
 
 	i = 0;
 	len = ft_prompt_len(cursor->line_end);
@@ -45,7 +45,7 @@ static void		ft_multiline_cursor_goto(t_cursor *cursor, size_t *vert, size_t *ho
 	}
 }
 
-void	ft_multiline_wrap(t_cursor *cursor, int flag)
+void			ft_multiline_wrap(t_cursor *cursor, int flag)
 {
 	char		*tc;
 	size_t		vert;
@@ -69,7 +69,7 @@ void	ft_multiline_wrap(t_cursor *cursor, int flag)
 	}
 }
 
-void	ft_reajust_cursor_wrap(t_cursor *cursor, int flag)
+void			ft_reajust_cursor_wrap(t_cursor *cursor, int flag)
 {
 	char		*tc;
 	size_t		i;
@@ -93,7 +93,7 @@ void	ft_reajust_cursor_wrap(t_cursor *cursor, int flag)
 }
 
 
-static void		ft_multiline_position(t_cursor *cursor, char flag, size_t ref)
+void			ft_multiline_position(t_cursor *cursor, char flag, size_t ref)
 {
 	char		*buff;
 	size_t		vert;
@@ -137,7 +137,7 @@ void	ft_cursor_reset(t_cursor *cursor, size_t ref)
 	tputs(buff, 1, &ft_pc);
 }
 
-void	ft_position_cursor(t_cursor *cursor)
+void			ft_position_cursor(t_cursor *cursor)
 {
 	char		*buff;
 	size_t		pos;
