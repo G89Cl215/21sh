@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/04 17:41:40 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/08 13:14:25 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SOURCES		=	ft_get_next_cmd_line.c \
 				perror1.c \
 				perror2.c \
 				ft_free_data.c \
+				signal_manager.c \
 
 SRCS		=	$(addprefix $(SRC_DIR)/,$(SOURCES))
 OBJS		=	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))

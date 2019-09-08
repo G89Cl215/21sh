@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/08 11:31:30 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/08 16:27:33 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include "minishell.h"
 #include "parsing.h"
+#include "signal.h"
 #include "libft.h"
 
 int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
@@ -40,16 +41,18 @@ int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
 
 int		ft_exec(t_env *env, t_env *env_exec, char **cmd_av, int *status)
 {
-	int		signal;
+	int		sig;
 
-	signal = ft_built_in(env_exec, cmd_av, status);
-	if (signal == NOT_BI)
+	sig = ft_built_in(env_exec, cmd_av, status);
+	if (sig == NOT_BI)
 	{
-		signal = ft_fork_and_exec(env, env_exec, cmd_av, status);
-		if (signal == EXEC_FAILURE && *status != NOT_A_CMD)
+		toggle_sig_mode();
+		sig = ft_fork_and_exec(env, env_exec, cmd_av, status);
+		if (sig == EXEC_FAILURE && *status != NOT_A_CMD)
 			*status = WEXITSTATUS(*status);
+		toggle_sig_mode();
 	}
-	return (signal);
+	return (sig);
 }
 
 int		ft_treat_line(t_data *data, int *status)
@@ -78,6 +81,7 @@ int		main(void)
 	t_data		data;
 	int			status;
 
+	ft_sig_setup();
 	ft_init_data(&data);
 	raw_term_mode();
 	line = NULL;
