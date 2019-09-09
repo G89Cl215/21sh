@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.h                                           :+:      :+:    :+:   */
+/*   autocomplete.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 12:02:28 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/09 17:26:07 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/09 20:15:36 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/09 20:42:24 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
 
-# include <signal.h>
-# include "def.h"
+void	ft_autocomplete(t_data *data)
+{
+	char		code;
+	char		*to_complete;
+	char		**results;
+	t_cursor	*cursor;
 
-void		ft_sig_setup(void);
-int		kill(pid_t pid, int sig);
-#endif
+	results = NULL;
+	to_complete = NULL;
+	cursor = data->cursor;
+	if ((code = ft_to_complete(cursor, to_complete)) == EXEC_NAME)
+		results =
+	else if (code == ABS_PATH)
+	{}
+	else if (code == REL_PATH)
+	{}
+	if ((results))
+		ft_display_results(results);
+}

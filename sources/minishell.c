@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/09 16:16:35 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 20:10:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
 	{
 		father = fork();
 		if (father == 0)
-				execve(execpath, av, env_exec->value);	//return status si non-executable/faillure to execute
+			execve(execpath, av, env_exec->value);	//return status si non-executable/faillure to execute
 		if (father > 0)
-			wait(status);
+			0, waitpid(0, status, WUNTRACED);
 		ft_set_env_var(env, "_", execpath);
 		free(execpath);
-		return (WIFEXITED(*status) ? EXEC_SUCCESS : EXEC_FAILURE);
+		return (WIFEXITED(*status) || WIFSTOPPED(*status) ? EXEC_SUCCESS : EXEC_FAILURE);
 	}
 	else
 		*status = NOT_A_CMD;
@@ -41,18 +41,18 @@ int		ft_fork_and_exec(t_env *env, t_env *env_exec, char **av, int *status)
 
 int		ft_exec(t_env *env, t_env *env_exec, char **cmd_av, int *status)
 {
-	int		sig;
+	int		signal;
 
-	sig = ft_built_in(env_exec, cmd_av, status);
-	if (sig == NOT_BI)
+	signal = ft_built_in(env_exec, cmd_av, status);
+	if (signal == NOT_BI)
 	{
 		toggle_sig_mode();
-		sig = ft_fork_and_exec(env, env_exec, cmd_av, status);
-		if (sig == EXEC_FAILURE && *status != NOT_A_CMD)
+		signal = ft_fork_and_exec(env, env_exec, cmd_av, status);
+		if (signal == EXEC_FAILURE && *status != NOT_A_CMD)
 			*status = WEXITSTATUS(*status);
 		toggle_sig_mode();
 	}
-	return (sig);
+	return (signal);
 }
 
 int		ft_treat_line(t_data *data, int *status)
@@ -81,8 +81,8 @@ int		main(void)
 	t_data		data;
 	int			status;
 
-	ft_sig_setup();
 	ft_init_data(&data);
+	ft_sig_setup();
 	raw_term_mode();
 	line = NULL;
 	status = 0;

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 13:06:53 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/09 16:16:55 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 20:10:32 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,18 @@ void	ft_plop(int nbr)
 void	ft_signal_manager(int sig_nbr)
 {
 //	t_data		*data;
-//	pid_t		pid;
+	pid_t		pid;
 
 	ft_plop(sig_nbr);
-	if (sig_nbr == 18)
-	{
-//		pid = getpid();
-//		f_term_mode();
-//		kill(pid, sig_nbr);
-	}
-	if (sig_nbr == 19)
-	{
-		raw_term_mode();
-/*		data = get_data();
-		ft_update_line(data->cursor, NULL);*/
-	}
+	pid = getpid();
+	if (sig_nbr == SIGTSTP || sig_nbr == SIGSTOP)
+		ft_printf("%s: program stopped by peer.\n", NAME);
+	if (sig_nbr == SIGCONT)
+	{}
+	if (sig_nbr == SIGCHLD)
+		ft_printf("The child has been touched...\n");
 	if (sig_nbr == 2)
-		ft_printf("%s: program interrupted by peer.", NAME);
+		ft_printf("%s: program interrupted by peer.\n", NAME);
 //	if (sig == 1)
 }
 
