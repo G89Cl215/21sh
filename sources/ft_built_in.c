@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 11:14:55 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/04 12:24:05 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:41:02 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 #include "minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
-
-void	ft_close_stream(int fd)
-{
-	char	*line;
-
-	close(fd);
-	get_next_line(fd, &line);
-	free(line);
-}
 
 int		ft_exit(t_env *env, char **av, int *status)
 {
@@ -46,7 +37,6 @@ int		ft_exit(t_env *env, char **av, int *status)
 		*status = ARG_NBR_HIGH;
 		return (EXEC_FAILURE);
 	}
-	ft_close_stream(0);
 	return (EXIT_SIGNAL);
 }
 

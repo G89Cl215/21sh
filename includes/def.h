@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:57:08 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/08 13:14:42 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:14:19 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEF_H
 
 # include <stddef.h>
+# include <termios.h>
 # include "d_list.h"
 
 # define MAX_KEY_SIZE		8
@@ -22,6 +23,8 @@
 # define UP					1
 # define NEW_CMD			1
 # define SAVE				1
+
+typedef struct termios	t_ermios;
 
 typedef struct		s_env
 {
@@ -42,6 +45,7 @@ typedef struct		s_cursor
 
 typedef struct		s_data
 {
+	t_ermios		*term_def_setting;
 	t_env			*env;
 	t_dlist			*history;
 	t_cursor		*cursor;

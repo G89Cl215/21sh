@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:16:49 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/03 14:14:37 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:07:22 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ void	ft_init_cursor(t_cursor *cursor, char flag)
 	cursor->line_form = NULL;
 }
 
+void	ft_save_term_settings(t_ermios *term_def_setting)
+{
+	t_ermios	tattr;
+
+	tcgetattr(STDIN_FILENO, &tattr);
+	term_def_setting->c_oflag = tattr.c_oflag;
+	term_def_setting->c_iflag = tattr.c_iflag;
+	term_def_setting->c_cflag = tattr.c_cflag;
+	term_def_setting->c_lflag = tattr.c_lflag;
+	ft_memcpy(term_def_setting->c_cc, tattr.c_cc, NCCS * sizeof(cc_t));
+	term_def_setting->c_ispeed = tattr.c_ispeed;
+	term_def_setting->c_ospeed = tattr.c_ospeed;
+}
+
 void	ft_init_data(t_data *data)
 {
 	if (!(data->cursor = (t_cursor*)malloc(sizeof(t_cursor))))
@@ -79,6 +93,9 @@ void	ft_init_data(t_data *data)
 	if (!(data->env = (t_env*)malloc(sizeof(t_env))))
 		ft_crisis_exit(MALLOC_ERR);
 	ft_init_env(data->env);
+	if (!(data->term_def_setting = (t_ermios*)malloc(sizeof(t_ermios))))
+		ft_crisis_exit(MALLOC_ERR);
+	ft_save_term_settings(data->term_def_setting);
 	ft_bzero(data->clipboard, MAX_LINE);
 	data->history = NULL;
 }

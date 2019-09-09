@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:17:05 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/04 12:17:53 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:42:19 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "list.h"
 # include "def.h"
 
-# define NAME "21_tgoued"
+# define NAME "21sh"
+# define PROMPT "21_tgoued"
 # define NL_PROMPT			"> "
 # define QUOTES_PROMPT		"quotes> "
 # define DQUOTES_PROMPT		"dquotes> "
@@ -54,6 +55,7 @@ void		ft_crisis_exit(int status);
 void		ft_free_data(t_data *data);
 char		**ft_command_parsing(t_data *data, int *status);
 void		ft_init_env(t_env *env);
+
 char		*ft_find_exec_path(t_env *env, char *exec);
 int			ft_built_in(t_env *env, char **av, int *status);
 void		ft_built_in_usage(char *built_in);

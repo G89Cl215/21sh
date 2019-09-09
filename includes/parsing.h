@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:38:41 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/08 15:16:03 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:15:50 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		ft_display_prompt(char flag);
 size_t		ft_prompt_len(char flag);
 void		ft_update_line(t_cursor *cursor, char *buff);
 void		raw_term_mode(void);
-void		def_term_mode(void);
+void		restore_term_mode(t_data *data);
 void		toggle_sig_mode(void);
 size_t		ft_get_term_length(void);
 size_t		ft_get_term_hight(void);
