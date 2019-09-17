@@ -6,14 +6,14 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:28:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/08/26 16:05:26 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:23:01 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <stdlib.h>
-#include "dispatcher.h"
-#include "minishell.h"
+#include "bi_dispatcher.h"
+#include "shell.h"
 #include "libft.h"
 
 t_dispatcher		g_built_in[] =

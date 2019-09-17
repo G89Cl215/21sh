@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   perror2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/07/02 16:55:25 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 16:22:57 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "def.h"
 #include "libft.h"
+#include "ft_printf.h"
+#include "shell.h"
 
-int		ft_free_data(t_data *data)
+void	ft_arg_not_num(char **av, char *err)
 {
-	int		status;
-
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+	(void)err;
+	ft_printf("%s: %s: %s: Numeric argument required\n", NAME, *av, av[1]);
 }

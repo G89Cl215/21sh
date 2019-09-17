@@ -6,15 +6,17 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 13:06:53 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/09 20:10:32 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:27:40 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
+#include <signal.h>
 #include <unistd.h>
-#include "minishell.h"
+#include <sys/types.h>
+#include <sys/wait.h>
+#include "shell.h"
 #include "ft_printf.h"
-#include "parsing.h"
+#include "line_edit.h"
 #include "signal.h"
 
 void	ft_plop(int nbr)
@@ -38,6 +40,8 @@ void	ft_signal_manager(int sig_nbr)
 	if (sig_nbr == 2)
 		ft_printf("%s: program interrupted by peer.\n", NAME);
 //	if (sig == 1)
+//	kill(getpid(), sig_nbr);
+	exit(0);
 }
 
 void	ft_sig_setup(void)
@@ -45,6 +49,6 @@ void	ft_sig_setup(void)
 	size_t		i;
 
 	i = 0;
-	while (i++ < 31)
-		signal(i, ft_signal_manager);
+//	while (i++ < 31)
+//		signal(i, ft_signal_manager);
 }

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   get_term_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/08/06 17:04:10 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 16:25:51 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "def.h"
-#include "libft.h"
+#include <term.h>
 
-int		ft_free_data(t_data *data)
+size_t	ft_get_term_length(void)
 {
-	int		status;
+	tgetent(NULL, getenv("TERM"));
+	return (tgetnum("co"));
+}
 
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+size_t	ft_get_term_hight(void)
+{
+	tgetent(NULL, getenv("TERM"));
+	return (tgetnum("li"));
 }

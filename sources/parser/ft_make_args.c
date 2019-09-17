@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   ft_make_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/17 15:55:03 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 16:37:07 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "def.h"
-#include "libft.h"
-
-int		ft_free_data(t_data *data)
+char				**ft_make_args(t_arglist *arg_list)
 {
-	int		status;
+	size_t		i;
+	size_t		ac;
+	char		**av;
+	t_arglist	*voyager;
 
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+	i = 0;
+	ac = ft_listlen(arg_list);
+	voyager = arg_list;
+	ft_mem_protect(av = (char**)malloc(sizeof(char*) * (ac + 1)));
+	while (voyager && i < ac)
+	{
+		ft_mem_protect(av[i] = ft_strdup(voyager->arg));
+		voyager = voyager->next;
+		i++;
+	}
+	av[i] = NULL;
+	return (av);
 }
+
+

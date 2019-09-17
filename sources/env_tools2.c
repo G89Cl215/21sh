@@ -6,12 +6,12 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 18:24:28 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/07/04 19:48:20 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:22:40 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell.h"
+#include "shell.h"
 #include <stdlib.h>
 
 char	*ft_new_env(char *var_name, char *var_value)

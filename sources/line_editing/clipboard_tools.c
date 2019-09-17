@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   clipboard_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/08/24 14:37:31 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 16:23:51 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "def.h"
 #include "libft.h"
+#include "def.h"
 
-int		ft_free_data(t_data *data)
+void	ft_save_in_clipboard(t_data *data, char *to_save, size_t len)
 {
-	int		status;
-
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+	ft_bzero(data->clipboard, MAX_LINE);
+	ft_memcpy(data->clipboard, to_save, len);
 }

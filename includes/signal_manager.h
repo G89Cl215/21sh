@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   signal_manager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/08 12:02:28 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 18:30:26 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "def.h"
-#include "libft.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-int		ft_free_data(t_data *data)
-{
-	int		status;
+# include "def.h"
 
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
-}
+void		ft_sig_setup(void);
+
+#endif

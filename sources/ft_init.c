@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:16:49 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/09 16:07:22 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:23:12 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/param.h>
 #include "def.h"
 #include "libft.h"
-#include "minishell.h"
+#include "shell.h"
 
 static int		ft_def_env_gen(t_env *env)
 {
@@ -59,7 +59,7 @@ void			ft_init_env(t_env *env)
 	}
 }
 
-void	ft_init_cursor(t_cursor *cursor, char flag)
+void			ft_init_cursor(t_cursor *cursor, char flag)
 {
 	ft_memset(cursor->cmd_line, '\0', MAX_LINE);
 	cursor->line_len = 0;
@@ -71,7 +71,7 @@ void	ft_init_cursor(t_cursor *cursor, char flag)
 	cursor->line_form = NULL;
 }
 
-void	ft_save_term_settings(t_ermios *term_def_setting)
+static void		ft_save_term_settings(t_ermios *term_def_setting)
 {
 	t_ermios	tattr;
 
@@ -85,16 +85,13 @@ void	ft_save_term_settings(t_ermios *term_def_setting)
 	term_def_setting->c_ospeed = tattr.c_ospeed;
 }
 
-void	ft_init_data(t_data *data)
+void			ft_init_data(t_data *data)
 {
-	if (!(data->cursor = (t_cursor*)malloc(sizeof(t_cursor))))
-		ft_crisis_exit(MALLOC_ERR);
+	ft_mem_protect(data->cursor = (t_cursor*)malloc(sizeof(t_cursor)));
 	ft_init_cursor(data->cursor, NEW_CMD);
-	if (!(data->env = (t_env*)malloc(sizeof(t_env))))
-		ft_crisis_exit(MALLOC_ERR);
+	ft_mem_protect(data->env = (t_env*)malloc(sizeof(t_env)));
 	ft_init_env(data->env);
-	if (!(data->term_def_setting = (t_ermios*)malloc(sizeof(t_ermios))))
-		ft_crisis_exit(MALLOC_ERR);
+	ft_mem_protect(data->term_def_setting = (t_ermios*)malloc(sizeof(t_ermios)));
 	ft_save_term_settings(data->term_def_setting);
 	ft_bzero(data->clipboard, MAX_LINE);
 	data->history = NULL;

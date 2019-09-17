@@ -6,12 +6,12 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 13:24:32 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/07/04 19:51:09 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:22:38 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell.h"
+#include "shell.h"
 #include <stdlib.h>
 
 char	*ft_get_env_var(t_env *env, char *var)

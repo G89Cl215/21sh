@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   meta_priority.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:37:51 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/17 17:14:32 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 17:24:33 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "def.h"
-#include "libft.h"
-
-int		ft_free_data(t_data *data)
+int					ft_priority(char *str)
 {
-	int		status;
+	(void)str;
+	return (1);
+}
 
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+t_arglist			*ft_priority_meta(t_arglist *tokens)
+{
+	t_arglist	*res;
+
+	res = NULL;
+	while ((tokens))
+	{
+		if (tokens->delim == META
+		&& (!(res) || ft_priority(tokens->arg) < ft_priority(res->arg)))
+			res = tokens;
+		tokens = tokens->next;
+	}
+	return (res);
 }

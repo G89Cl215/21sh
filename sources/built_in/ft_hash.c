@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_exec_path.c                                :+:      :+:    :+:   */
+/*   ft_hash.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 15:28:36 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:23:03 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/12 18:44:58 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/17 16:22:34 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "shell.h"
 
-static char		*ft_check_dir_for_exec(char *path, char *exec)
+static char		*ft_check_dir_for_exec(char *path)
 {
 	DIR				*dir;
 	struct dirent	*dirdata;
@@ -24,7 +24,7 @@ static char		*ft_check_dir_for_exec(char *path, char *exec)
 	if ((dir = opendir(path)))
 	{
 		while ((dirdata = readdir(dir)))
-			if (!(ft_strcmp(dirdata->d_name, exec)))
+			if (dirdata->d_type, exec)
 			{
 				closedir(dir);
 				if (!(res = ft_strdup(path)))
@@ -37,20 +37,21 @@ static char		*ft_check_dir_for_exec(char *path, char *exec)
 	return (NULL);
 }
 
-char			*ft_find_exec_path(t_env *env, char *exec)
+char			*ft_find_exec_path(t_data *data)
 {
 	size_t		i;
 	char		**path;
 	char		*res;
 
-	if ((res = ft_get_env_var(env, "PATH")))
+	if ((res = ft_get_env_var(env, "PATH")) && ft_strcmp(res, data->hash_path))
 	{
+		data->hash_path = res;
+		ft_tab_free(data->hash);
 		if (!(path = ft_strsplit(res, ':')))
 			ft_crisis_exit(MALLOC_ERR);
-		ft_strdel(&res);
 		i = 0;
-		while (path[i] && !(res))
-			res = ft_check_dir_for_exec(path[i++], exec);
+		while ((path[i]))
+			ft_update_hash(data, path[i++]);
 		ft_tabfree(path);
 	}
 	return (res);

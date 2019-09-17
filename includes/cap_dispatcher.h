@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:28:10 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/08 11:25:26 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/17 18:07:06 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define CTRL_J_CODE		0x0a
 # define CTRL_K_CODE		0x0b
 # define CTRL_L_CODE		0x0c
-# define CTRL_M_CODE		0x0a	//bizarrerie ici ?
+# define CTRL_M_CODE		0x0d	//bizarrerie ici ?
 # define CTRL_N_CODE		0x0e
 # define CTRL_P_CODE		0x10
 # define CTRL_R_CODE		0x12
