@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:58:14 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 20:15:21 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:30:00 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ t_token				g_token_dispatcher[] =
 	{NULL, NULL}
 };
 
-static t_arglist	*ft_multiline_command(t_data *data)
-{
-	t_arglist		*new_link;
-
-	new_link = NULL;
-	if ((ft_get_next_cmd_line(data)))
-		new_link = ft_tokenizing(data);
-	return (new_link);
-}
-
 static t_arglist	*ft_next_token(char *cmd, size_t *i, char *flag)
 {
 	size_t		j;
@@ -51,6 +41,41 @@ static t_arglist	*ft_next_token(char *cmd, size_t *i, char *flag)
 			return (ft_next_plain_token(cmd + *i, i, flag));
 	}
 	return (g_token_dispatcher[j].ft_next_token(cmd + *i, i, flag));
+}
+
+t_arglist			*ft_relink_tokens(t_arglist *arg_list)
+{
+	t_arglist	*voyager;
+	t_arglist	*new_list;
+	char		*token;
+
+	new_list = NULL;
+	voyager = arg_list;
+	while ((voyager))
+	{
+		ft_mem_protect(token = ft_strdup(voyager->arg));
+		while (!(voyager->to_link) && (voyager->next))
+		{
+			voyager = voyager->next;
+			if (!(ft_strappend(&token, &(voyager->arg))))
+				ft_crisis_exit(MALLOC_ERR);
+		}
+		ft_listadd_back(&new_list, ft_listnewstr(token, 1, voyager->delim));
+		voyager = voyager->next;
+		free(token);
+	}
+	ft_listfree(&arg_list);
+	return (new_list);
+}
+
+static t_arglist	*ft_multiline_command(t_data *data)
+{
+	t_arglist		*new_link;
+
+	new_link = NULL;
+	if ((ft_get_next_cmd_line(data)))
+		new_link = ft_tokenizing(data);
+	return (new_link);
 }
 
 t_arglist			*ft_tokenizing(t_data *data)
@@ -77,31 +102,6 @@ t_arglist			*ft_tokenizing(t_data *data)
 	if (flag != NO_DELIM)
 		ft_listadd_back(&arg_list, ft_multiline_command(data));
 	return (arg_list);
-}
-
-t_arglist			*ft_relink_tokens(t_arglist *arg_list)
-{
-	t_arglist	*voyager;
-	t_arglist	*new_list;
-	char		*token;
-
-	new_list = NULL;
-	voyager = arg_list;
-	while ((voyager))
-	{
-		ft_mem_protect(token = ft_strdup(voyager->arg));
-		while (!(voyager->to_link) && (voyager->next))
-		{
-			voyager = voyager->next;
-			if (!(ft_strappend(&token, &(voyager->arg))))
-				ft_crisis_exit(MALLOC_ERR);
-		}
-		ft_listadd_back(&new_list, ft_listnewstr(token, 1, voyager->delim));
-		voyager = voyager->next;
-		free(token);
-	}
-	ft_listfree(&arg_list);
-	return (new_list);
 }
 
 t_arglist	*ft_lexer(t_data *data)

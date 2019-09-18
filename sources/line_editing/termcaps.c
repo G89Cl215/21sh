@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 21:35:32 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:27:11 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:37:00 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <stdio.h>
 
 #include <stdlib.h>
-#include "parsing.h"
-#include "libft.h"
-#include "d_list.h"
-#include "shell.h"
 #include "cap_dispatcher.h"
+#include "line_edit.h"
+#include "d_list.h"
+#include "libft.h"
+#include "shell.h"
 
 t_cap		g_termcap[] =
 {

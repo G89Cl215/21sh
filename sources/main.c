@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:46:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 18:46:00 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:07:15 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int		main(void)
 	while (1)
 	{
 		if ((ft_get_next_cmd_line(&data)))
-			ft_parser(data);
-		else if (!(data->status = 0))
+			ft_parser(&data);
+		else if (!(data.status = 0))
 		{
 			ft_putstr("\n");
 			ft_putendl("exit");

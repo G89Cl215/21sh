@@ -6,7 +6,7 @@
 /*   by: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   created: 2019/09/12 12:35:24 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/12 17:00:17 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:27:56 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int					ft_is_dquoted_token(char *str, size_t *len, char flag);
 t_arglist			*ft_next_dquoted_token(char *str, size_t *len, char *flag);
 int					ft_is_bquoted_token(char *str, size_t *len, char flag);
 t_arglist			*ft_next_bquoted_token(char *str, size_t *len, char *flag);
+int					ft_is_meta(char *str, size_t *len, char flag);
+t_arglist			*ft_next_meta_token(char *str, size_t *len, char *flag);
 
 #endif

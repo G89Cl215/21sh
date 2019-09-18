@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/17 16:12:42 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/18 03:49:45 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ LIBS		=	$(LIB_PATH)/$(LIB) \
 
 P_SRC_DIR	=	parser
 P_SOURCES	=	parser.c \
+				ft_make_args.c \
+				meta_priority.c \
+				parse_struct_tools.c \
 
 LEX_SRC_DIR	=	lexer
 LEX_SOURCES	=	lexer.c \
@@ -30,8 +33,7 @@ LEX_SOURCES	=	lexer.c \
 				token_tools.c \
 
 LIN_SRC_DIR	=	line_editing
-LIN_SOURCES	=	autocomplete.c \
-				clipboard_tools.c \
+LIN_SOURCES	=	clipboard_tools.c \
 				ctrl_keys.c \
 				cursor_moves.c \
 				cursor_tools.c \
@@ -64,7 +66,7 @@ BI_SOURCES	=	ft_built_in.c \
 				ft_built_in_cd.c \
 				ft_built_in_env.c \
 				ft_built_in_env2.c \
-				ft_hash.c \
+#				ft_hash.c \
 
 SRC_DIR		=	sources
 SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR)}
@@ -78,6 +80,7 @@ SOURCES		=	main.c \
 				ft_find_exec_path.c \
 				ft_free_data.c \
 				signal_manager.c \
+				meta.c \
 				$(addprefix $(P_SRC_DIR)/,$(P_SOURCES)) \
 				$(addprefix $(LEX_SRC_DIR)/,$(LEX_SOURCES)) \
 				$(addprefix $(LIN_SRC_DIR)/,$(LIN_SOURCES)) \

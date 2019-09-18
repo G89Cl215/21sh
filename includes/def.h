@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:57:08 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 20:15:21 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 04:29:16 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,19 @@ typedef struct			s_data
 	int					status;
 }						t_data;
 
+typedef int				(t_ft_meta)(void *, void *);
+
 typedef struct			s_meta
 {
-	char				meta[2];
+	char				*meta;
 	char				flag;
 	int					priority;
-	//pointeur sur fonction (*ft_meta)();
+	t_ft_meta			*exec_func;
 }						t_meta;
 
 typedef struct			s_meta_parse
 {
-//	t_meta				meta; pointeur sur fonction (*ft_meta)();
+	t_ft_meta			*exec_func;
 	t_arglist			*tokens;
 	struct s_meta_parse	*left_cmd;
 	struct s_meta_parse	*right_cmd;

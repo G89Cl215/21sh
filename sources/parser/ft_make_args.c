@@ -6,9 +6,14 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:55:03 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:37:07 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:41:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include "libft.h"
+#include "shell.h"
+#include "list.h"
 
 char				**ft_make_args(t_arglist *arg_list)
 {

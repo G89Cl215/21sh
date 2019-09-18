@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:58:42 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 19:00:59 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 03:31:53 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int					ft_is_meta(char *str, size_t *len, char flag)
 {
 	if (flag == QUOTES || flag == BQUOTES || flag == DQUOTES)
 		return (0);
-	if (ft_is_in(str[*len], META_CHAR))
+	if (ft_isin(str[*len], META_CHAR))
 		return (1);
 	return (0);
 }

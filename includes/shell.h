@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 16:30:33 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 20:15:21 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/18 04:05:01 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define NO_MATCH			-12
 # define ERR_NBR			6
 # define IFS				" \t"
-# define TOKEN_DELIM		"\'\"\` \t"
+# define TOKEN_DELIM		"\'\"` \t"
 # define META_CHAR			"><|;&"
 
 # ifndef PATH_MAX
@@ -61,26 +61,27 @@
 # define PIPE				13
 # define DOLLAR_SPE			"?"
 
-int			ft_exec(t_env *env, t_env *env_exec, char **cmd_av, int *status);
-int			ft_fork_and_exec(t_env *env, t_env *env_exec, char **av,
-																int *status);
 void		ft_display_err(t_env *env, char **av, int status, int w_index);
 void		ft_mem_protect(void *to_allocate);
 void		ft_crisis_exit(int status);
-void		ft_free_data(t_data *data);
-char		**ft_command_parsing(t_data *data, int *status);
+int			ft_free_data(t_data *data);
+
 void		ft_init_env(t_env *env);
 char		*ft_find_exec_path(t_env *env, char *exec);
+int			ft_exec(t_env *env, t_env *env_exec, char **cmd_av, int *status);
+int			ft_fork_and_exec(t_env *env, t_env *env_exec, char **av,
+																int *status);
 int			ft_built_in(t_env *env, char **av, int *status);
 void		ft_built_in_usage(char *built_in);
 char		*ft_find_exec(t_env *env, char *to_find);
 char		*ft_build_path(char *path, char *exec);
+
 char		*ft_get_env_var(t_env *env, char *var);
 int			ft_set_env_var(t_env *env, char *var_name, char *var_value);
 int			ft_unset_env_var(t_env *env, char *var_name);
 int			ft_reallocate_env(t_env *env);
 char		*ft_new_env(char *var_name, char *var_value);
-t_arglist 	*ft_tokenizing(t_data *data);
+
 void		ft_var_expanding(t_env *env, t_arglist *voyager, int *status);
 void		ft_tilde_expand(t_env *env, t_arglist *arg);
 void		ft_dollar_expand(t_env *env, t_arglist *arg, int status);
@@ -89,5 +90,18 @@ char		*ft_construct_expansion(char *arg, char *expansion, size_t var_pos,
 																size_t var_len);
 int			ft_is_escaped(char *str, int i);
 void		ft_remove_slash(char *arg);
+
+void			ft_recognize_meta(const char *str, size_t *len,
+															char *meta_flag);
+t_arglist		*ft_tokenizing(t_data *data);
+t_arglist		*ft_lexer(t_data *data);
+
+int				ft_priority(char flag);
+t_ft_meta		*ft_meta_function(char flag);
+t_arglist		*ft_priority_meta(t_arglist *tokens);
+t_meta_parse	*ft_new_parse_struct(t_arglist *tokens);
+void			ft_free_parse_struct(t_meta_parse *parse_struct);
+int				ft_parser(t_data *data);
+
 
 #endif
