@@ -6,39 +6,58 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 04:15:16 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 06:24:50 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 16:53:38 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <fcntl.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include "libft.h"
+#include "shell.h"
 #include "def.h"
 
-int		ft_pipe(void *left_cmd, void *right_cmd)
+int		ft_pipe(t_data *data, void *left_cmd, void *right_cmd)
 {
-	pid_t	
+	pid_t	father;
 	int		pdes[2];
+	int		*status;
 
+	status = &(data->status);
 	pipe(pdes);
 	father = fork();
 	if (father == 0)
 	{
-		dup2(pdes[0], STDIN_FILENO);
-		clode(pdes[1]);
-		ft_exec_struct(left_cmd);
+		ft_putendl("\n execution de gauche");
+		dup2(pdes[WRITE], STDOUT_FILENO);
+		close(pdes[READ]);
+		ft_exec_struct(data, left_cmd);
+		ft_putendl("\n execution de gauche finie");
+		exit(0);
 	}
 	if (father > 0)
 	{
-		waitpid(0, status, WUNTRACED);
+		dup2(pdes[READ], STDIN_FILENO);
+		close(pdes[WRITE]);
+		waitpid(father, status, WUNTRACED);
+		ft_putendl("\n attente de gauche finie");
 		father = fork();
 		if (father == 0)
 		{
-			dup2(pdes[1], STDOUT_FILENO);
-			clode(pdes[0]);
-			ft_exec_struct(right_cmd);
+			ft_putendl("\n execution de droite");
+			ft_exec_struct(data, right_cmd);
+			close(pdes[READ]);
+			exit(0);
 		}
-		if (father > 0)
-			waitpid(0, status, WUNTRACED);
-		return (WIFEXITED(*status) || WIFSTOPPED(*status) ? EXEC_SUCCESS : EXEC_FAILURE);
+		else if (father > 0)
+		{
+			close(pdes[READ]);
+			waitpid(father, status, WUNTRACED);
+		}
+		ft_putendl("que pasa ?");
+//		exit(0);
+//		open(0, O_RDONLY);
 	}
-	
+	return (WIFEXITED(*status) || WIFSTOPPED(*status) ? EXEC_SUCCESS : EXEC_FAILURE);
 }

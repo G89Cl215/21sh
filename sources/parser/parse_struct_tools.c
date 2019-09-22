@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 02:02:28 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 03:51:46 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 11:31:36 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_meta_parse		*ft_new_parse_struct(t_arglist *tokens)
 
 	ft_mem_protect(parse_struct = (t_meta_parse*)malloc(sizeof(*parse_struct)));
 	parse_struct->tokens = tokens;
+	parse_struct->exec_func = NULL;
 	parse_struct->left_cmd = NULL;
 	parse_struct->right_cmd = NULL;
 	return (parse_struct);

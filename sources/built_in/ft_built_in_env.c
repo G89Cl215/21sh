@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:31:48 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:21:59 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 11:12:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,25 @@ static size_t	ft_cmd_start(char **av)
 	return ((av[i]) ? i : 0);
 }
 
-int				ft_env(t_env *env, char **av, int *status)
+int				ft_env(t_data *data, char **av)
 {
 	int		i;
 	int		signal;
-	t_env	tmp_env;
+	t_env	*tmp_env;
 
+	tmp_env = data->env_exec;
 	i = ft_cmd_start(av);
-	ft_construct_tmp_env(env, &tmp_env, av, (i) ? i : ft_tablen(av));
+	ft_construct_tmp_env(data->env, tmp_env, av, (i) ? i : ft_tablen(av));
 	if (i == 0)
 	{
-		while (((tmp_env.value)[i]))
-			ft_putendl((tmp_env.value)[i++]);
-		ft_tabfree(tmp_env.value);
-		return (*status = EXEC_SUCCESS);
+		while (((tmp_env->value)[i]))
+			ft_putendl((tmp_env->value)[i++]);
+		ft_tabfree(tmp_env->value);
+		return (data->status = EXEC_SUCCESS);
 	}
 	else
-		signal = ft_exec(env, &tmp_env, &(av[i]), status);
-	if ((tmp_env.value))
-		ft_tabfree(tmp_env.value);
+		signal = ft_exec(data, &(av[i]));
+	if ((tmp_env->value))
+		ft_tabfree(tmp_env->value);
 	return (signal == EXEC_SUCCESS ? EXEC_SUCCESS : i);
 }

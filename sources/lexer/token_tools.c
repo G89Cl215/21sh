@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:58:56 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 03:34:06 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 12:12:29 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_arglist	*ft_next_meta_token(char *str, size_t *len, char *flag)
 	t_arglist		*new_link;
 
 	*flag = NO_DELIM;
-	ft_recognize_meta(str + *len, &i, &meta_flag);
+	ft_recognize_meta(str, &i, &meta_flag);
 	new_link = ft_listnewword(str, i, 1, meta_flag); // newline apres une sequence "|\n" ?
 	*len += i;
 	return (new_link);

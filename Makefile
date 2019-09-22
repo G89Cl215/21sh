@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/18 03:49:45 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/22 11:16:37 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,11 @@ BI_SOURCES	=	ft_built_in.c \
 				ft_built_in_env2.c \
 #				ft_hash.c \
 
+EXE_SRC_DIR	=	exec_cmd
+EXE_SOURCES	=	exec_parse_struc.c \
+
 SRC_DIR		=	sources
-SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR)}
+SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR),$(EXE_SRC_DIR)}
 SOURCES		=	main.c \
 				term_mode.c \
 				word_tools.c \
@@ -81,12 +84,14 @@ SOURCES		=	main.c \
 				ft_free_data.c \
 				signal_manager.c \
 				meta.c \
+				meta_exec_fun.c \
 				$(addprefix $(P_SRC_DIR)/,$(P_SOURCES)) \
 				$(addprefix $(LEX_SRC_DIR)/,$(LEX_SOURCES)) \
 				$(addprefix $(LIN_SRC_DIR)/,$(LIN_SOURCES)) \
 				$(addprefix $(ERR_SRC_DIR)/,$(ERR_SOURCES)) \
 				$(addprefix $(VAR_SRC_DIR)/,$(VAR_SOURCES)) \
 				$(addprefix $(BI_SRC_DIR)/,$(BI_SOURCES)) \
+				$(addprefix $(EXE_SRC_DIR)/,$(EXE_SOURCES)) \
 
 SRCS		=	$(addprefix $(SRC_DIR)/,$(SOURCES)) \
 

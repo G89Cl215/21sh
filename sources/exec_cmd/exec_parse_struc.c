@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_data.c                                     :+:      :+:    :+:   */
+/*   exec_parse_struc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 11:11:12 by tgouedar         ###   ########.fr       */
+/*   Created: 2019/09/22 10:23:21 by tgouedar          #+#    #+#             */
+/*   Updated: 2019/09/22 15:52:23 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "def.h"
 #include "libft.h"
+#include "shell.h"
 
-int		ft_free_data(t_data *data)
+
+int			ft_exec_struct(t_data *data, t_meta_parse *to_exec)
 {
-	int		status;
+	int		int_sig;
+	char	**av;
 
-	status = data->status;
-	ft_tabfree((data->env)->value);
-	free(data->env);
-	if (((data->env_exec)->value))
-		ft_tabfree((data->env_exec)->value);
-	free(data->env_exec);
-	ft_free_dlist(&(data->history));
-	if (((data->cursor)->line_form))
-		ft_memdel((void **)(&((data->cursor)->line_form)));
-	free(data->cursor);
-	free(data->term_def_setting);
-	return (status);
+	int_sig = 0;
+	if ((to_exec->exec_func))
+		int_sig = to_exec->exec_func(data, to_exec->left_cmd, to_exec->right_cmd);
+	else if ((to_exec->tokens))
+	{
+		av = ft_make_args(to_exec->tokens);
+/*
+	int i = 0;
+	while (av[i])
+	{
+		ft_putendl(av[i++]);
+	}
+*/
+		int_sig = ft_exec(data, av);
+		ft_tabfree(av);
+//		exit(0);
+	}
+	return (int_sig);
 }

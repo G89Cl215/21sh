@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 16:30:33 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 04:05:01 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 13:19:37 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@
 # define PIPE				13
 # define DOLLAR_SPE			"?"
 
+# define READ				0
+# define WRITE				1
+
 void		ft_display_err(t_env *env, char **av, int status, int w_index);
 void		ft_mem_protect(void *to_allocate);
 void		ft_crisis_exit(int status);
@@ -68,9 +71,9 @@ int			ft_free_data(t_data *data);
 
 void		ft_init_env(t_env *env);
 char		*ft_find_exec_path(t_env *env, char *exec);
-int			ft_exec(t_env *env, t_env *env_exec, char **cmd_av, int *status);
-int			ft_fork_and_exec(t_env *env, t_env *env_exec, char **av,
-																int *status);
+int			ft_exec(t_data *data, char **cmd_av);
+int			ft_fork_and_exec(t_data *data, char **av, int *status);
+int			ft_exec_struct(t_data *data, t_meta_parse *to_exec);
 int			ft_built_in(t_env *env, char **av, int *status);
 void		ft_built_in_usage(char *built_in);
 char		*ft_find_exec(t_env *env, char *to_find);
@@ -101,6 +104,7 @@ t_ft_meta		*ft_meta_function(char flag);
 t_arglist		*ft_priority_meta(t_arglist *tokens);
 t_meta_parse	*ft_new_parse_struct(t_arglist *tokens);
 void			ft_free_parse_struct(t_meta_parse *parse_struct);
+char			**ft_make_args(t_arglist *arg_list);
 int				ft_parser(t_data *data);
 
 

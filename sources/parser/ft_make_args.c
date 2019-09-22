@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:55:03 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 03:41:35 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 11:22:01 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,3 @@ char				**ft_make_args(t_arglist *arg_list)
 	av[i] = NULL;
 	return (av);
 }
-
-

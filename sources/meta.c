@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:47:19 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 04:45:03 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 12:13:35 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_meta	g_meta_dispatcher[] =
 	{"&&", LOGIC_AND, LOGIC_AND_PRIO, ft_logic_and},
 	{"&", AMPERSAND, AMPERSAND_PRIO, ft_ampersand},
 	{"||", LOGIC_OR, LOGIC_OR_PRIO, ft_logic_or},*/
-	{"|", PIPE, PIPE_PRIO, ft_pipe},
+	{"|\0", PIPE, PIPE_PRIO, ft_pipe},
 	{NULL, 0, INT_MAX, NULL}
 };
 

@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:57:08 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/18 04:29:16 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/22 10:55:37 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct			s_data
 {
 	t_ermios			*term_def_setting;
 	t_env				*env;
+	t_env				*env_exec;
 	t_dlist				*history;
 	t_cursor			*cursor;
 	char				clipboard[MAX_LINE];
@@ -56,7 +57,7 @@ typedef struct			s_data
 	int					status;
 }						t_data;
 
-typedef int				(t_ft_meta)(void *, void *);
+typedef int				(t_ft_meta)(t_data *data, void *, void *);
 
 typedef struct			s_meta
 {
