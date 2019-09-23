@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 20:31:33 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:22:15 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 17:00:50 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@ static int	ft_all_args_are_var(char **av)
 	return (!(av[i]));
 }
 
-int			ft_setenv(t_env *env, char **av, int *status)
+int			ft_setenv(t_data *data, char **av)
 {
 	size_t	len;
 
 	len = ft_tablen(av);
 	if (len == 1)
-		return (ft_env(env, av, status));
+		return (ft_env(data, av));
 	if (ft_all_args_are_var(av))
-		return (ft_create_all_var(env, av));
+		return (ft_create_all_var(data->env, av));
 	if (ft_strchr(av[1], '='))
 		ft_printf("%s: setenv: No '=' allowed in variable name\n", NAME);
 	else if (len < 4)
 	{
-		ft_set_env_var(env, av[1], (len == 3) ? av[2] : NULL);
+		ft_set_env_var(data->env, av[1], (len == 3) ? av[2] : NULL);
 		return (EXEC_SUCCESS);
 	}
 	else
-		*status = ARG_NBR_HIGH;
+		data->status = ARG_NBR_HIGH;
 	return (EXEC_FAILURE);
 }
 
@@ -67,21 +67,21 @@ void		ft_set_usage(void)
 	ft_putendl("setenv: usage: setenv VAR [VALUE]");
 }
 
-int			ft_unsetenv(t_env *env, char **av, int *status)
+int			ft_unsetenv(t_data *data, char **av)
 {
 	size_t	len;
 
 	len = ft_tablen(av);
 	if (len == 2)
 	{
-		if (ft_unset_env_var(env, av[1]) == -1)
+		if (ft_unset_env_var(data->env, av[1]) == -1)
 			ft_printf("%s: unsetenv: %s: No such variable in environnement\n",
 												NAME, av[1]);
-		return (*status = EXEC_SUCCESS);
+		return (data->status = EXEC_SUCCESS);
 	}
 	if (len < 2)
-		*status = ARG_NBR_LOW;
+		data->status = ARG_NBR_LOW;
 	if (len > 2)
-		*status = ARG_NBR_HIGH;
+		data->status = ARG_NBR_HIGH;
 	return (EXEC_FAILURE);
 }

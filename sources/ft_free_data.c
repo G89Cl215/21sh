@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 12:07:54 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 11:11:12 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 17:19:15 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_free_data(t_data *data)
 	status = data->status;
 	ft_tabfree((data->env)->value);
 	free(data->env);
-	if (((data->env_exec)->value))
+	if ((data->env_exec)->value != NULL)
 		ft_tabfree((data->env_exec)->value);
 	free(data->env_exec);
 	ft_free_dlist(&(data->history));

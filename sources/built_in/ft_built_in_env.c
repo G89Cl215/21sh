@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 17:31:48 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 11:12:35 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 21:07:02 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,18 @@ static int		ft_set_tmp_env(t_env *tmp_env, char **av, size_t i)
 	return (1);
 }
 
-static int		ft_construct_tmp_env(t_env *env, t_env *tmp_env, char **av,
-																	size_t cmd)
+static int		ft_construct_tmp_env(t_data *data, char **av, size_t cmd)
 {
 	size_t	i;
+	t_env	*env;
+	t_env	*tmp_env;
 
 	i = 1;
+	env = data->env;
+	tmp_env = data->env_exec;
 	if ((av[i]) && !(ft_strcmp(av[i], "-i")))
 	{
-		if (!(tmp_env->value = (char**)malloc(2 * sizeof(char*))))
-			ft_crisis_exit(MALLOC_ERR);
+		ft_mem_protect(tmp_env->value = (char**)malloc(2 * sizeof(char*)));
 		tmp_env->value[0] = NULL;
 		tmp_env->value[1] = NULL;
 		tmp_env->empty_lines = 1;
@@ -56,7 +58,7 @@ static int		ft_construct_tmp_env(t_env *env, t_env *tmp_env, char **av,
 	}
 	else
 	{
-		tmp_env->value = ft_tabcpy(env->value);
+		ft_mem_protect(tmp_env->value = ft_tabcpy(env->value));
 		tmp_env->empty_lines = 0;
 	}
 	while (i < cmd)
@@ -92,17 +94,20 @@ int				ft_env(t_data *data, char **av)
 
 	tmp_env = data->env_exec;
 	i = ft_cmd_start(av);
-	ft_construct_tmp_env(data->env, tmp_env, av, (i) ? i : ft_tablen(av));
+	ft_construct_tmp_env(data, av, (i) ? i : ft_tablen(av));
 	if (i == 0)
 	{
 		while (((tmp_env->value)[i]))
 			ft_putendl((tmp_env->value)[i++]);
-		ft_tabfree(tmp_env->value);
-		return (data->status = EXEC_SUCCESS);
+		data->status = EXEC_SUCCESS;
+		signal = EXEC_SUCCESS;
 	}
 	else
-		signal = ft_exec(data, &(av[i]));
+		signal = ft_exec(data, &(av[i]), FORK);
 	if ((tmp_env->value))
+	{
 		ft_tabfree(tmp_env->value);
-	return (signal == EXEC_SUCCESS ? EXEC_SUCCESS : i);
+		tmp_env->value = NULL;
+	}
+	return (signal == EXEC_SUCCESS ? EXEC_SUCCESS : i); //i pour avoir l'indice de la commande pour l'erreur -> bizarre et complique...
 }

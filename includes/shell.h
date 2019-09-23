@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 16:30:33 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 13:19:37 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 21:00:53 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define QUOTES_PROMPT		"quotes> "
 # define DQUOTES_PROMPT		"dquotes> "
 # define BQUOTES_PROMPT		"bquotes> "
+# define FORK				0
+# define NO_FORK			1
 # define EXEC_SUCCESS		0
 # define EXEC_FAILURE		-1
 # define EXIT_SIGNAL		-2
@@ -71,10 +73,9 @@ int			ft_free_data(t_data *data);
 
 void		ft_init_env(t_env *env);
 char		*ft_find_exec_path(t_env *env, char *exec);
-int			ft_exec(t_data *data, char **cmd_av);
-int			ft_fork_and_exec(t_data *data, char **av, int *status);
-int			ft_exec_struct(t_data *data, t_meta_parse *to_exec);
-int			ft_built_in(t_env *env, char **av, int *status);
+int			ft_exec(t_data *data, char **cmd_av, char to_fork);
+int			ft_exec_struct(t_data *data, t_meta_parse *to_exec, char to_fork);
+int			ft_built_in(t_data *data, char **av);
 void		ft_built_in_usage(char *built_in);
 char		*ft_find_exec(t_env *env, char *to_find);
 char		*ft_build_path(char *path, char *exec);
@@ -101,7 +102,7 @@ t_arglist		*ft_lexer(t_data *data);
 
 int				ft_priority(char flag);
 t_ft_meta		*ft_meta_function(char flag);
-t_arglist		*ft_priority_meta(t_arglist *tokens);
+t_arglist		*ft_priority_meta(t_arglist *tokens, char *flag);
 t_meta_parse	*ft_new_parse_struct(t_arglist *tokens);
 void			ft_free_parse_struct(t_meta_parse *parse_struct);
 char			**ft_make_args(t_arglist *arg_list);

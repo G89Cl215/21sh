@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 17:14:32 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 13:08:50 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 21:17:15 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "list.h"
 
-t_arglist			*ft_priority_meta(t_arglist *tokens)
+t_arglist			*ft_priority_meta(t_arglist *tokens, char *flag)
 {
 	t_arglist	*res;
 
@@ -29,7 +29,10 @@ t_arglist			*ft_priority_meta(t_arglist *tokens)
 		tokens = tokens->next;
 	}
 	if ((res))
+	{
+		*flag = res->delim;
 		ft_printf("\n la priorite max : {%s}\n", res->arg);
+	}
 	else
 		ft_putendl("\n NO METCHAR");
 	return (res);

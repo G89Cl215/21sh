@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 18:16:49 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 11:43:44 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 12:41:09 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ static int		ft_def_env_gen(t_env *env)
 {
 	char	pwd[PATH_MAX];
 
-	if (!(env->value = (char**)malloc(2 * sizeof(char*))))
-		ft_crisis_exit(MALLOC_ERR);
+	ft_mem_protect(env->value = (char**)malloc(2 * sizeof(char*)));
 	env->value[0] = NULL;
 	env->value[1] = NULL;
 	env->empty_lines = 1;
 	getcwd(pwd, PATH_MAX);
 	ft_set_env_var(env, "PWD", pwd);
 	ft_set_env_var(env, "SHLVL", "1");
-	ft_set_env_var(env, "TERM", "xterm-256color");
+	ft_set_env_var(env, "TERM", "xterm-256color"); // A changer avec tty ?
 	return (0);
 }
 
@@ -44,8 +43,7 @@ void			ft_init_env(t_env *env)
 		ft_def_env_gen(env);
 	else
 	{
-		if (!(env->value = ft_tabcpy(environ)))
-			ft_crisis_exit(MALLOC_ERR);
+		ft_mem_protect(env->value = ft_tabcpy(environ));
 		if ((shlvl = ft_get_env_var(env, "SHLVL")))
 		{
 			lvl = ft_atoi(shlvl) + 1;

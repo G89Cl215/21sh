@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/22 11:16:37 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/23 21:58:33 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ P_SOURCES	=	parser.c \
 				ft_make_args.c \
 				meta_priority.c \
 				parse_struct_tools.c \
+				meta_dispatcher.c \
 
 LEX_SRC_DIR	=	lexer
 LEX_SOURCES	=	lexer.c \
@@ -70,6 +71,7 @@ BI_SOURCES	=	ft_built_in.c \
 
 EXE_SRC_DIR	=	exec_cmd
 EXE_SOURCES	=	exec_parse_struc.c \
+				ft_exec.c \
 
 SRC_DIR		=	sources
 SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR),$(EXE_SRC_DIR)}
@@ -83,7 +85,6 @@ SOURCES		=	main.c \
 				ft_find_exec_path.c \
 				ft_free_data.c \
 				signal_manager.c \
-				meta.c \
 				meta_exec_fun.c \
 				$(addprefix $(P_SRC_DIR)/,$(P_SOURCES)) \
 				$(addprefix $(LEX_SRC_DIR)/,$(LEX_SOURCES)) \
@@ -92,8 +93,6 @@ SOURCES		=	main.c \
 				$(addprefix $(VAR_SRC_DIR)/,$(VAR_SOURCES)) \
 				$(addprefix $(BI_SRC_DIR)/,$(BI_SOURCES)) \
 				$(addprefix $(EXE_SRC_DIR)/,$(EXE_SOURCES)) \
-
-SRCS		=	$(addprefix $(SRC_DIR)/,$(SOURCES)) \
 
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
@@ -109,6 +108,7 @@ CLEAN		=	clean
 
 all			:	libs
 	@(($(MAKE) -q $(NAME) && echo "Your $(NAME) is up to date") || $(MAKE) $(NAME))
+	cp $(NAME) signal_test
 
 libs	:
 	@cd $(LIB_PATH) && $(MAKE)

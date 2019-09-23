@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:33:11 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:21:54 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:58:19 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,15 @@ static int		ft_find_target(size_t *i, char **av)
 	return (TARGET_FOUND);
 }
 
-int				ft_cd(t_env *env, char **av, int *status)
+int				ft_cd(t_data *data, char **av)
 {
 	size_t	target_index;
 
-	*status = ft_find_target(&target_index, av);
-	if (*status != TARGET_FOUND)
+	data->status = ft_find_target(&target_index, av);
+	if (data->status != TARGET_FOUND)
 		return (EXEC_FAILURE);
-	*status = ft_cd_exec(env, av[target_index]);
-	return ((*status == EXEC_SUCCESS || *status == UNSET_VAR)
+	data->status = ft_cd_exec(data->env, av[target_index]);
+	return ((data->status == EXEC_SUCCESS || data->status == UNSET_VAR)
 											? EXEC_SUCCESS : target_index);
 }
 

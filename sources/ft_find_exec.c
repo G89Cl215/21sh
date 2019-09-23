@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:28:22 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/17 16:23:01 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:17:04 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int			ft_is_built_in(char *to_find, size_t *i)
 	return (0);
 }
 
-int					ft_built_in(t_env *env, char **av, int *status)
+int					ft_built_in(t_data *data, char **av)
 {
 	size_t	i;
 
 	if (ft_is_built_in(*av, &i))
-		return ((g_built_in[i]).ft_(env, av, status));
+		return ((g_built_in[i]).ft_(data, av));
 	return (NOT_BI);
 }
 

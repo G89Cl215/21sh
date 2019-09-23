@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 04:15:16 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/22 18:20:00 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/23 21:11:09 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int		ft_pipe(t_data *data, void *left_cmd, void *right_cmd)
 			ft_putendl("\n execution de gauche");
 			dup2(pdes[WRITE], STDOUT_FILENO);
 			close(pdes[READ]);
-			ft_exec_struct(data, left_cmd);
+			ft_exec_struct(data, left_cmd, NO_FORK);
 			ft_putendl("\n execution de gauche finie");
-			exit(0);
 		}
 		if (child > 0)
 		{
@@ -47,18 +46,12 @@ int		ft_pipe(t_data *data, void *left_cmd, void *right_cmd)
 			waitpid(child, status, WUNTRACED);
 			ft_putendl("\n attente de gauche finie");
 			ft_putendl("\n execution de droite");
-			ft_exec_struct(data, right_cmd);
-			close(pdes[READ]);
-			exit(0);
+			ft_exec_struct(data, right_cmd, NO_FORK);
 		}
-		//		open(0, O_RDONLY);
+		close(pdes[READ]);
 	}
 	else if (father > 0)
-	{
-		//			close(pdes[READ]);
 		waitpid(father, status, WUNTRACED);
-	}
 	ft_putendl("que pasa ?");
-	//		exit(0);
 	return (WIFEXITED(*status) || WIFSTOPPED(*status) ? EXEC_SUCCESS : EXEC_FAILURE);
 }
