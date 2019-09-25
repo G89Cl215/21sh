@@ -6,17 +6,16 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 04:15:16 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/25 13:08:08 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/25 15:31:20 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include "libft.h"
 #include "shell.h"
-#include "def.h"
 
 int		ft_pipe(t_data *data, void *left_cmd, void *right_cmd)
 {

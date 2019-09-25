@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:47:19 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/25 13:27:14 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/25 16:38:59 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 t_meta			g_meta_dispatcher[] =
 {
-//	{">>", R_REDIR_APPEND, R_REDIR_APPEND_PRIO, ft_r_redir_append}
-//	{"<<", L_REDIR_APPEND, L_REDIR_APPEND_PRIO, ft_l_redir_append},
-//	{">", R_REDIR, R_REDIR_PRIO, ft_r_redir},
-//	{"<", L_REDIR, L_REDIR_PRIO, ft_l_redir},
+	{">>", R_REDIR_APPEND, R_REDIR_APPEND_PRIO, ft_r_redir_append},
+//	{"<<", L_REDIR_APPEND, L_REDIR_APPEND_PRIO, ft_l_redir_heredoc},
+	{">", R_REDIR, R_REDIR_PRIO, ft_r_redir},
+	{"<", L_REDIR, L_REDIR_PRIO, ft_l_redir},
 	{";", SEMI_COL, SEMI_COL_PRIO, ft_semi_col},
-//	{"&&", LOGIC_AND, LOGIC_AND_PRIO, ft_logic_and},
+	{"&&", LOGIC_AND, LOGIC_AND_PRIO, ft_logic_and},
 //	{"&", AMPERSAND, AMPERSAND_PRIO, ft_ampersand},
-//	{"||", LOGIC_OR, LOGIC_OR_PRIO, ft_logic_or},
-	{"|\0", PIPE, PIPE_PRIO, ft_pipe},
+	{"||", LOGIC_OR, LOGIC_OR_PRIO, ft_logic_or},
+	{"|", PIPE, PIPE_PRIO, ft_pipe},
 	{NULL, 0, INT_MAX, NULL}
 };
 
@@ -56,8 +56,7 @@ void		ft_recognize_meta(const char *str, size_t *len, char *meta_flag)
 	i = 0;
 	while (g_meta_dispatcher[i].meta)
 	{
-		if (!ft_strncmp(g_meta_dispatcher[i].meta, str, 1)
-		|| !ft_strncmp(g_meta_dispatcher[i].meta, str, 2))
+		if (!ft_strncmp(g_meta_dispatcher[i].meta, str, ft_strlen(g_meta_dispatcher[i].meta)))
 		{
 			*len = ft_strlen(g_meta_dispatcher[i].meta);
 			*meta_flag = g_meta_dispatcher[i].flag;

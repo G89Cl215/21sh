@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/25 13:16:34 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/25 15:33:38 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,10 @@ EXE_SOURCES	=	exec_parse_struc.c \
 				ft_exec.c \
 				ft_pipe.c \
 				ft_semicol.c \
+				ft_logic_or.c \
+				ft_logic_and.c \
+				ft_r_redir.c \
+				ft_l_redir.c \
 
 SRC_DIR		=	sources
 SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR),$(EXE_SRC_DIR)}
