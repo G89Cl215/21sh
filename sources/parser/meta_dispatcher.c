@@ -6,7 +6,7 @@
 /*   By: tgouedar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:47:19 by tgouedar          #+#    #+#             */
-/*   Updated: 2019/09/23 17:53:01 by tgouedar         ###   ########.fr       */
+/*   Updated: 2019/09/25 13:27:14 by tgouedar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 t_meta			g_meta_dispatcher[] =
 {
-/*	{">>", R_REDIR_APPEND, R_REDIR_APPEND_PRIO, ft_r_redir_append},
-	{"<<", L_REDIR_APPEND, L_REDIR_APPEND_PRIO, ft_l_redir_append},
-	{">", R_REDIR, R_REDIR_PRIO, ft_r_redir},
-	{"<", L_REDIR, L_REDIR_PRIO, ft_l_redir},
+//	{">>", R_REDIR_APPEND, R_REDIR_APPEND_PRIO, ft_r_redir_append}
+//	{"<<", L_REDIR_APPEND, L_REDIR_APPEND_PRIO, ft_l_redir_append},
+//	{">", R_REDIR, R_REDIR_PRIO, ft_r_redir},
+//	{"<", L_REDIR, L_REDIR_PRIO, ft_l_redir},
 	{";", SEMI_COL, SEMI_COL_PRIO, ft_semi_col},
-	{"&&", LOGIC_AND, LOGIC_AND_PRIO, ft_logic_and},
-	{"&", AMPERSAND, AMPERSAND_PRIO, ft_ampersand},
-	{"||", LOGIC_OR, LOGIC_OR_PRIO, ft_logic_or},*/
+//	{"&&", LOGIC_AND, LOGIC_AND_PRIO, ft_logic_and},
+//	{"&", AMPERSAND, AMPERSAND_PRIO, ft_ampersand},
+//	{"||", LOGIC_OR, LOGIC_OR_PRIO, ft_logic_or},
 	{"|\0", PIPE, PIPE_PRIO, ft_pipe},
 	{NULL, 0, INT_MAX, NULL}
 };

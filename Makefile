@@ -6,7 +6,7 @@
 #    By: baavril <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/16 10:37:50 by baavril           #+#    #+#              #
-#    Updated: 2019/09/23 21:58:33 by tgouedar         ###   ########.fr        #
+#    Updated: 2019/09/25 13:16:34 by tgouedar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ BI_SOURCES	=	ft_built_in.c \
 EXE_SRC_DIR	=	exec_cmd
 EXE_SOURCES	=	exec_parse_struc.c \
 				ft_exec.c \
+				ft_pipe.c \
+				ft_semicol.c \
 
 SRC_DIR		=	sources
 SRC_SUBDIR	=	{$(P_SRC_DIR),$(BI_SRC_DIR),$(LIN_SRC_DIR),$(LEX_SRC_DIR),$(ERR_SRC_DIR),$(VAR_SRC_DIR),$(EXE_SRC_DIR)}
@@ -85,7 +87,6 @@ SOURCES		=	main.c \
 				ft_find_exec_path.c \
 				ft_free_data.c \
 				signal_manager.c \
-				meta_exec_fun.c \
 				$(addprefix $(P_SRC_DIR)/,$(P_SOURCES)) \
 				$(addprefix $(LEX_SRC_DIR)/,$(LEX_SOURCES)) \
 				$(addprefix $(LIN_SRC_DIR)/,$(LIN_SOURCES)) \
@@ -108,7 +109,6 @@ CLEAN		=	clean
 
 all			:	libs
 	@(($(MAKE) -q $(NAME) && echo "Your $(NAME) is up to date") || $(MAKE) $(NAME))
-	cp $(NAME) signal_test
 
 libs	:
 	@cd $(LIB_PATH) && $(MAKE)
